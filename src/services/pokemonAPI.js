@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pokeapi.co/api/v2/';
-const LIMIT = 20;
+export const LIMIT = 20;
 
 axios.defaults.baseURL = BASE_URL;
 
 async function fetchPokemonAll(offset = 0) {
   const { data } = await axios.get(`pokemon/?limit=${LIMIT}&offset=${offset}`);
 
-  return data.results;
+  return data;
 }
 
 async function fetchPokemonByName(pokemonName) {

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
-const getPokemonAll = (state) => state.pokemon.pokemonAll;
+const getPokemonCount = (state) => state.pokemon.pokemonAll.count;
+const getPokemonAll = (state) => state.pokemon.pokemonAll.data;
 const getPokemonOne = (state) => state.pokemon.pokemonOne;
 const getFilterPokemonByName = (state) => state.pokemon.filterPokemonByName;
 const getFilterPokemonByType = (state) => state.pokemon.filterPokemonByType;
@@ -29,7 +30,7 @@ const normalizeInputValue = (value) => value.toLowerCase().trim();
 const getFilteredPokemon = createSelector(
   [getPokemonAll, getFilterPokemonByName, getFilterPokemonByType],
   (pokemonAll, getFilterPokemonByName, filterPokemonByType) => {
-    return pokemonAll.filter(({ name, type }) => {
+    return pokemonAll?.filter(({ name, type }) => {
       if (filterPokemonByType === '') {
         return name.toLowerCase().includes(getFilterPokemonByName);
       } else {
@@ -43,6 +44,7 @@ const getFilteredPokemon = createSelector(
 );
 
 export {
+  getPokemonCount,
   getPokemonAll,
   getPokemonOne,
   getFilteredPokemonByName,

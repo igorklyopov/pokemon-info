@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -19,8 +19,16 @@ import {
   getFilteredPokemon,
 } from '../redux/pokemonSelectors';
 
+import { LIMIT } from '../services/pokemonAPI';
+
+import PokemonPagination from './PokemonPagination';
+
+import { useLocation } from 'react-router-dom';
+
 export default function PokemonList() {
   const [expanded, setExpanded] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   // const pokemonAll = useSelector(getPokemonAll);
   // const pokemonAll = useSelector(getFilteredPokemonByName);
@@ -28,11 +36,14 @@ export default function PokemonList() {
   // console.log('pokemonAll', pokemonAll);
   const pokemonOne = useSelector(getPokemonOne);
 
-  const dispatch = useDispatch();
+  const pageNumber = new URLSearchParams(location.search).get('page') ?? 1;
+  const activePage = parseInt(pageNumber);
+
+  const offset = (activePage - 1) * LIMIT;
 
   useEffect(() => {
-    dispatch(getPokemonAllData());
-  }, [dispatch]);
+    dispatch(getPokemonAllData(offset));
+  }, [dispatch, offset]);
 
   const handleChange = (panel) => (event, isExpanded) => {
     // setPokemonInfo(null);
@@ -86,6 +97,7 @@ export default function PokemonList() {
           </AccordionDetails>
         </Accordion>
       ))}
+      <PokemonPagination page={activePage} />
     </Container>
   );
 }

@@ -5,13 +5,15 @@ import { getPokemonTypes } from './pokemonSelectors';
 
 const getPokemonAllData = createAsyncThunk(
   'pokemon/getPokemonAllData',
-  async (_, { rejectWithValue }) => {
+  async (offset, { rejectWithValue }) => {
     const pokemonDataPromises = [];
 
     const pokemonAllData = await pokemonAPI
-      .fetchPokemonAll()
+      .fetchPokemonAll(offset)
       .then((pokemonList) => {
-        for (const pokemon of pokemonList) {
+        const pokemonCount = pokemonList.count;
+
+        for (const pokemon of pokemonList.results) {
           pokemonDataPromises.push(pokemonAPI.fetchPokemonByName(pokemon.name));
         }
 
@@ -21,7 +23,7 @@ const getPokemonAllData = createAsyncThunk(
             name: result.name,
             type: result.types.map((type) => type.type.name),
           }));
-          return pokemonData;
+          return { count: pokemonCount, data: pokemonData };
         });
       });
 
@@ -57,7 +59,7 @@ const getPokemonTypesAll = createAsyncThunk(
       const pokemonTypes = await pokemonAPI
         .fetchPokemonTypes()
         .then(({ results }) => results.map((type) => type.name));
-      console.log('pokemonTypes', pokemonTypes);
+
       return pokemonTypes;
     } catch (err) {
       return rejectWithValue(err.message);
