@@ -66,7 +66,7 @@ export default function PokemonSearch(props) {
         </SearchIconWrapper>
         <StyledTextField
           fullWidth
-          placeholder="Search…"
+          placeholder="Search"
           inputProps={{ 'aria-label': 'search pokemon by name' }}
           onChange={onPokemonSearchChange}
         />

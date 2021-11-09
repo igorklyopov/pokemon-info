@@ -17,6 +17,9 @@ const theme = createTheme({
       primary: '#EE6055',
     },
   },
+  typography: {
+    fontFamily: 'Mochiy Pop P One',
+  },
 });
 
 export { theme };

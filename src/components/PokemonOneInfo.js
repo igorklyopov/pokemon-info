@@ -10,12 +10,16 @@ export default function PokemonOneInfo({ pokemon, pokemonOne }) {
   return pokemonOneLoading ? (
     <Loader />
   ) : (
-    <AccordionDetails>
+    <AccordionDetails className="pokemon-info-content">
       <div className="pokemon-info-main-info-wrap">
-        <img src={pokemonOne?.img || noImage} alt={pokemon.name} width="150" />
+        <img
+          src={pokemonOne?.img || noImage}
+          alt={pokemon.name}
+          width="150"
+          className="pokemon-info-image"
+        />
         <div className="pokemon-main-info">
-          {/* <div className="pokemon-info-type"> */}
-          <h3 className="pokemon-info-subtitle">Type:</h3>
+          <h3 className="pokemon-info-subtitle">Type</h3>
           <ul className="list">
             {pokemonOne?.types?.map((typeItem) => (
               <li key={typeItem.type.name} className="pokemon-info-type-item">
@@ -23,10 +27,8 @@ export default function PokemonOneInfo({ pokemon, pokemonOne }) {
               </li>
             ))}
           </ul>
-          {/* </div> */}
 
-          {/* <div className="pokemon-info-stats"> */}
-          <h3 className="pokemon-info-subtitle">Stats:</h3>
+          <h3 className="pokemon-info-subtitle">Stats</h3>
           <ul className="list">
             {pokemonOne?.stats?.map((statsItem) => (
               <li key={statsItem.stat.name} className="pokemon-info-stats-item">
@@ -35,11 +37,10 @@ export default function PokemonOneInfo({ pokemon, pokemonOne }) {
               </li>
             ))}
           </ul>
-          {/* </div> */}
         </div>
       </div>
 
-      <h3 className="pokemon-info-subtitle">Moves:</h3>
+      <h3 className="pokemon-info-subtitle">Moves</h3>
       <ul className="list pokemon-info-moves-list">
         {pokemonOne?.moves?.map((moveItem) => (
           <li key={moveItem.move.name} className="pokemon-info-moves-item">
