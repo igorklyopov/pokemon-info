@@ -21,7 +21,7 @@ import {
 
 import { LIMIT } from '../services/pokemonAPI';
 
-import PokemonOneInfo from './PokenonOneInfo';
+import PokemonOneInfo from './PokemonOneInfo';
 import PokemonPagination from './PokemonPagination';
 import Loader from './Loader';
 import Notification from './Notification';
@@ -71,7 +71,14 @@ export default function PokemonList() {
                 aria-controls={`${pokemon.name}-content`}
                 id={`${pokemon.name}-header`}
               >
-                <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                <Typography
+                  component="h2"
+                  sx={{
+                    width: '33%',
+                    flexShrink: 0,
+                    textTransform: 'uppercase',
+                  }}
+                >
                   {pokemon.name}
                 </Typography>
               </AccordionSummary>
