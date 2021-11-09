@@ -7,7 +7,9 @@ const getFilterPokemonByName = (state) => state.pokemon.filterPokemonByName;
 const getFilterPokemonByType = (state) => state.pokemon.filterPokemonByType;
 const getPokemonTypes = (state) => state.pokemon.pokemonTypes;
 const getPokemonAllLoadingStatus = (state) => state.pokemon.pokemonAllLoading;
+const getPokemonAllError = (state) => state.pokemon.pokemonAllError;
 const getPokemonOneLoadingStatus = (state) => state.pokemon.pokemonOneLoading;
+const getPokemonOneError = (state) => state.pokemon.pokemonOneError;
 
 // const normalizeInputValue = (value) => value.toLowerCase().trim();
 
@@ -35,5 +37,7 @@ export {
   getPokemonTypes,
   getFilterPokemonByType,
   getPokemonAllLoadingStatus,
+  getPokemonAllError,
   getPokemonOneLoadingStatus,
+  getPokemonOneError,
 };

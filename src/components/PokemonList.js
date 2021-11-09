@@ -16,7 +16,7 @@ import {
   getPokemonOne,
   getFilteredPokemon,
   getPokemonAllLoadingStatus,
-  getPokemonOneLoadingStatus,
+  getPokemonAllError,
 } from '../redux/pokemonSelectors';
 
 import { LIMIT } from '../services/pokemonAPI';
@@ -24,6 +24,7 @@ import { LIMIT } from '../services/pokemonAPI';
 import PokemonOneInfo from './PokenonOneInfo';
 import PokemonPagination from './PokemonPagination';
 import Loader from './Loader';
+import Notification from './Notification';
 
 export default function PokemonList() {
   const [expanded, setExpanded] = useState(false);
@@ -36,7 +37,7 @@ export default function PokemonList() {
   // console.log('pokemonAll', pokemonAll);
   const pokemonOne = useSelector(getPokemonOne);
   const pokemonAllLoading = useSelector(getPokemonAllLoadingStatus);
-  const pokemonOneLoading = useSelector(getPokemonOneLoadingStatus);
+  const pokemonAllError = useSelector(getPokemonAllError);
 
   const pageNumber = new URLSearchParams(location.search).get('page') ?? 1;
   const activePage = parseInt(pageNumber);
@@ -74,15 +75,14 @@ export default function PokemonList() {
                   {pokemon.name}
                 </Typography>
               </AccordionSummary>
-              {pokemonOneLoading ? (
-                <Loader />
-              ) : (
-                <PokemonOneInfo pokemon={pokemon} pokemonOne={pokemonOne} />
-              )}
+              <PokemonOneInfo pokemon={pokemon} pokemonOne={pokemonOne} />
             </Accordion>
           ))}
           <PokemonPagination page={activePage} />
         </>
+      )}
+      {pokemonAllError && (
+        <Notification message="Something went wrong ... Please try again later" />
       )}
     </Container>
   );

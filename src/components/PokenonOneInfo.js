@@ -1,8 +1,15 @@
 import AccordionDetails from '@mui/material/AccordionDetails';
 import noImage from '../images/no-image.png';
+import Loader from './Loader';
+import { useSelector } from 'react-redux';
+import { getPokemonOneLoadingStatus } from '../redux/pokemonSelectors';
 
 export default function PokemonOneInfo({ pokemon, pokemonOne }) {
-  return (
+  const pokemonOneLoading = useSelector(getPokemonOneLoadingStatus);
+
+  return pokemonOneLoading ? (
+    <Loader />
+  ) : (
     <AccordionDetails>
       <img src={pokemonOne?.img || noImage} alt={pokemon.name} width="150" />
       <h3>Moves</h3>
