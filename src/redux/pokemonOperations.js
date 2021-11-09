@@ -6,28 +6,34 @@ import { getPokemonTypes } from './pokemonSelectors';
 const getPokemonAllData = createAsyncThunk(
   'pokemon/getPokemonAllData',
   async (offset, { rejectWithValue }) => {
-    const pokemonDataPromises = [];
+    try {
+      const pokemonDataPromises = [];
 
-    const pokemonAllData = await pokemonAPI
-      .fetchPokemonAll(offset)
-      .then((pokemonList) => {
-        const pokemonCount = pokemonList.count;
+      const pokemonAllData = await pokemonAPI
+        .fetchPokemonAll(offset)
+        .then((pokemonList) => {
+          const pokemonCount = pokemonList.count;
 
-        for (const pokemon of pokemonList.results) {
-          pokemonDataPromises.push(pokemonAPI.fetchPokemonByName(pokemon.name));
-        }
+          for (const pokemon of pokemonList.results) {
+            pokemonDataPromises.push(
+              pokemonAPI.fetchPokemonByName(pokemon.name)
+            );
+          }
 
-        return Promise.all(pokemonDataPromises).then((results) => {
-          const pokemonData = results.map((result) => ({
-            id: result.id,
-            name: result.name,
-            type: result.types.map((type) => type.type.name),
-          }));
-          return { count: pokemonCount, data: pokemonData };
+          return Promise.all(pokemonDataPromises).then((results) => {
+            const pokemonData = results.map((result) => ({
+              id: result.id,
+              name: result.name,
+              type: result.types.map((type) => type.type.name),
+            }));
+            return { count: pokemonCount, data: pokemonData };
+          });
         });
-      });
 
-    return pokemonAllData;
+      return pokemonAllData;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
   }
 );
 
@@ -38,8 +44,9 @@ const getPokemonOneData = createAsyncThunk(
       const pokemonOneData = await pokemonAPI
         .fetchPokemonByName(pokemonName)
         .then((pokemon) => ({
-          // img: pokemon.sprites.front_default,
-          img: pokemon.sprites.other.dream_world.front_default,
+          img:
+            pokemon.sprites.other.dream_world.front_default ||
+            pokemon.sprites.other.home.front_default,
           moves: pokemon.moves,
           stats: pokemon.stats,
           types: pokemon.types,

@@ -1,3 +1,3 @@
-# Pokemon Info App
+# Pokémon Info App
 
-[https://igorklyopov.github.io](Demo)
+[Demo](https://igorklyopov.github.io)

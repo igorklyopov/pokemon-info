@@ -7,13 +7,19 @@ import {
 
 const initialState = {
   pokemonAll: [],
+  pokemonAllLoading: false,
+  pokemonAllError: null,
+
   pokemonOne: {
     img: null,
     moves: null,
     stats: null,
     types: null,
   },
-  pokemonTypes: ['all'],
+  pokemonOneLoading: false,
+  pokemonOneError: null,
+
+  pokemonTypes: [],
   filterPokemonByName: '',
   filterPokemonByType: '',
 };
@@ -32,26 +38,32 @@ const pokemonSlice = createSlice({
   extraReducers: {
     //===All==//
     [getPokemonAllData.pending](state) {
-      //
+      state.pokemonAllLoading = true;
+      state.pokemonAllError = null;
     },
     [getPokemonAllData.fulfilled](state, action) {
       state.pokemonAll = action.payload;
-      //
+      state.pokemonAllLoading = false;
+      state.pokemonAllError = null;
     },
-    [getPokemonAllData.rejected](state) {
-      //
+    [getPokemonAllData.rejected](state, action) {
+      state.pokemonAllLoading = false;
+      state.pokemonAllError = action.payload;
     },
 
     //===One===//
     [getPokemonOneData.pending](state) {
-      //
+      state.pokemonOneLoading = true;
+      state.pokemonOneError = null;
     },
     [getPokemonOneData.fulfilled](state, action) {
       state.pokemonOne = action.payload;
-      //
+      state.pokemonOneLoading = false;
+      state.pokemonOneError = action.payload;
     },
-    [getPokemonOneData.rejected](state) {
-      //
+    [getPokemonOneData.rejected](state, action) {
+      state.pokemonOneLoading = false;
+      state.pokemonOneError = action.payload;
     },
 
     //===Types==//

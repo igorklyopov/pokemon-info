@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -10,10 +9,10 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 export default function PokemonPagination({ page }) {
   const pokemonCount = useSelector(getPokemonCount);
-  const pokemonPageCount = Math.ceil(pokemonCount / LIMIT);
-
   const location = useLocation();
   const history = useHistory();
+
+  const pokemonPageCount = pokemonCount ? Math.ceil(pokemonCount / LIMIT) : 0;
 
   const handleChange = (event, value) => {
     history.push({ ...location, search: `page=${value}` });
@@ -21,11 +20,13 @@ export default function PokemonPagination({ page }) {
 
   return (
     <Stack spacing={2}>
-      <Pagination
-        count={pokemonPageCount}
-        page={page}
-        onChange={handleChange}
-      />
+      {pokemonPageCount > 0 && (
+        <Pagination
+          count={pokemonPageCount}
+          page={page}
+          onChange={handleChange}
+        />
+      )}
     </Stack>
   );
 }

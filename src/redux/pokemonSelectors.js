@@ -6,26 +6,10 @@ const getPokemonOne = (state) => state.pokemon.pokemonOne;
 const getFilterPokemonByName = (state) => state.pokemon.filterPokemonByName;
 const getFilterPokemonByType = (state) => state.pokemon.filterPokemonByType;
 const getPokemonTypes = (state) => state.pokemon.pokemonTypes;
+const getPokemonAllLoadingStatus = (state) => state.pokemon.pokemonAllLoading;
+const getPokemonOneLoadingStatus = (state) => state.pokemon.pokemonOneLoading;
 
-const getFilteredPokemonByName = createSelector(
-  [getPokemonAll, getFilterPokemonByName],
-  (pokemonAll, filterPokemonByName) => {
-    return pokemonAll.filter((pokemonItem) =>
-      pokemonItem.name.toLowerCase().includes(filterPokemonByName)
-    );
-  }
-);
-
-const getFilteredPokemonByType = createSelector(
-  [getPokemonAll, getFilterPokemonByType],
-  (pokemonAll, filterPokemonByType) => {
-    return pokemonAll.filter((pokemonItem) =>
-      pokemonItem.type.toLowerCase().includes(filterPokemonByType)
-    );
-  }
-);
-
-const normalizeInputValue = (value) => value.toLowerCase().trim();
+// const normalizeInputValue = (value) => value.toLowerCase().trim();
 
 const getFilteredPokemon = createSelector(
   [getPokemonAll, getFilterPokemonByName, getFilterPokemonByType],
@@ -47,9 +31,9 @@ export {
   getPokemonCount,
   getPokemonAll,
   getPokemonOne,
-  getFilteredPokemonByName,
-  getFilteredPokemonByType,
   getFilteredPokemon,
   getPokemonTypes,
   getFilterPokemonByType,
+  getPokemonAllLoadingStatus,
+  getPokemonOneLoadingStatus,
 };
