@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -18,8 +17,7 @@ import {
   getPokemonAllLoadingStatus,
   getPokemonAllError,
 } from '../redux/pokemonSelectors';
-
-import { LIMIT } from '../services/pokemonAPI';
+import { LIMIT } from '../services/pokemonApiConstants';
 
 import PokemonOneInfo from './PokemonOneInfo';
 import PokemonPagination from './PokemonPagination';
@@ -30,11 +28,7 @@ export default function PokemonList() {
   const [expanded, setExpanded] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
-
-  // const pokemonAll = useSelector(getPokemonAll);
-  // const pokemonAll = useSelector(getFilteredPokemonByName);
   const pokemonAll = useSelector(getFilteredPokemon);
-  // console.log('pokemonAll', pokemonAll);
   const pokemonOne = useSelector(getPokemonOne);
   const pokemonAllLoading = useSelector(getPokemonAllLoadingStatus);
   const pokemonAllError = useSelector(getPokemonAllError);
@@ -55,7 +49,7 @@ export default function PokemonList() {
   };
 
   return (
-    <Container>
+    <Container sx={{ pt: '100px' }}>
       {pokemonAllLoading ? (
         <Loader />
       ) : (

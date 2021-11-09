@@ -5,7 +5,6 @@ import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-// import './index.css';
 import { theme } from './common/theme';
 import './sass/main.scss';
 import App from './App';

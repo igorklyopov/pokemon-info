@@ -1,9 +1,8 @@
-import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { getPokemonCount } from '../redux/pokemonSelectors';
 import { useSelector } from 'react-redux';
-import { LIMIT } from '../services/pokemonAPI';
+import { LIMIT } from '../services/pokemonApiConstants';
 
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -19,12 +18,19 @@ export default function PokemonPagination({ page }) {
   };
 
   return (
-    <Stack spacing={2}>
+    <Stack
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      spacing={2}
+      sx={{ mt: '10px' }}
+    >
       {pokemonPageCount > 0 && (
         <Pagination
           count={pokemonPageCount}
           page={page}
           onChange={handleChange}
+          sx={{ pt: '10px', pb: '10px' }}
         />
       )}
     </Stack>

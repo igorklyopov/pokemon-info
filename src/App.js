@@ -8,13 +8,10 @@ import {
 
 import PokemonList from './components/PokemonList';
 import HideAppBar from './components/HideAppBar';
-import Loader from './components/Loader';
 import { Typography } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 
 function App() {
-  // const isLoading = useSelector(getLoadingStatus);
-
   return (
     <main>
       <HideAppBar />

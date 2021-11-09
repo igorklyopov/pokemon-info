@@ -11,8 +11,6 @@ const getPokemonAllError = (state) => state.pokemon.pokemonAllError;
 const getPokemonOneLoadingStatus = (state) => state.pokemon.pokemonOneLoading;
 const getPokemonOneError = (state) => state.pokemon.pokemonOneError;
 
-// const normalizeInputValue = (value) => value.toLowerCase().trim();
-
 const getFilteredPokemon = createSelector(
   [getPokemonAll, getFilterPokemonByName, getFilterPokemonByType],
   (pokemonAll, getFilterPokemonByName, filterPokemonByType) => {

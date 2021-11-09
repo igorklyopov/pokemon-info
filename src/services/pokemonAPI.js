@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://pokeapi.co/api/v2/';
-export const LIMIT = 20;
+import { BASE_URL, LIMIT } from './pokemonApiConstants';
 
 axios.defaults.baseURL = BASE_URL;
 
