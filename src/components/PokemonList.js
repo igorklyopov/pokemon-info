@@ -50,6 +50,9 @@ export default function PokemonList() {
 
   return (
     <Container sx={{ pt: '100px' }}>
+      {pokemonAll?.length < 1 && (
+        <Notification message="No Pokemon was found for this request. Try another one or search on another page" />
+      )}
       {pokemonAllLoading ? (
         <Loader />
       ) : (
@@ -79,7 +82,7 @@ export default function PokemonList() {
               <PokemonOneInfo pokemon={pokemon} pokemonOne={pokemonOne} />
             </Accordion>
           ))}
-          <PokemonPagination page={activePage} />
+          {pokemonAll && <PokemonPagination page={activePage} />}
         </>
       )}
       {pokemonAllError && (
