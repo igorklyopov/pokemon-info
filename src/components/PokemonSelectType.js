@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 
 import {
   getPokemonTypes,
@@ -15,7 +12,6 @@ import { getPokemonTypesAll } from '../redux/pokemonOperations';
 import { changePokemonFilterByType } from '../redux/pokemonSlice';
 
 export default function PokemonSelectType() {
-  const [age, setAge] = useState('');
   const dispatch = useDispatch();
   const pokemonTypes = useSelector(getPokemonTypes);
   const filterPokemonByType = useSelector(getFilterPokemonByType);

@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import pokemonAPI from '../services/pokemonAPI';
-import { getPokemonTypes } from './pokemonSelectors';
 
 const getPokemonAllData = createAsyncThunk(
   'pokemon/getPokemonAllData',

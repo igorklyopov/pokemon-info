@@ -1,13 +1,7 @@
-import PropTypes from 'prop-types';
-
+import { useDispatch } from 'react-redux';
 import { styled, alpha } from '@mui/material/styles';
-
-import IconButton from '@mui/material/IconButton';
-
 import SearchIcon from '@mui/icons-material/Search';
 import { TextField } from '@mui/material';
-
-import { useDispatch } from 'react-redux';
 
 import { changePokemonFilterByName } from '../redux/pokemonSlice';
 
